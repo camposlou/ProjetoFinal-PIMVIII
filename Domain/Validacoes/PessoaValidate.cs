@@ -45,8 +45,9 @@ namespace Domain.Validacoes
         {
             return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
         }
-        public static string RemoveCharactersDocument(string cpf) => cpf = cpf.Trim().Replace(".", "").Replace("-", "");
+        public static string RemoveCharactersDocument(string cpf) => cpf.Trim().Replace(".", "").Replace("-", "");
 
-        public static string AddCharactersDocument(string cpf) => cpf = cpf.Substring(0, 3) + "." + cpf.Substring(3, 3) + "." + cpf.Substring(6, 3) + "-" + cpf.Substring(9, 2);
+        public static string AddCharactersDocument(string cpf) => cpf.Substring(0, 3) + "." + cpf.Substring(3, 3) + "." + 
+            cpf.Substring(6, 3) + "-" + cpf.Substring(9, 2);
     }
 }

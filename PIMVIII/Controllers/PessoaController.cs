@@ -32,13 +32,15 @@ namespace PIMVIII.Controllers
         {
             if (!PessoaValidate.ValidateCpf(pessoaIn.Cpf)) return BadRequest("CPF inválido!");
 
-            var pessoa = _pessoaServices.GetCpf(pessoaIn.Cpf);
+            var cpf = PessoaValidate.RemoveCharactersDocument(pessoaIn.Cpf);
+            cpf = PessoaValidate.AddCharactersDocument(cpf);
+
+            var pessoa = _pessoaServices.GetCpf(cpf);
 
             if (pessoa == null)
             {
                 pessoa = new();
-                pessoa.Cpf = PessoaValidate.RemoveCharactersDocument(pessoaIn.Cpf);
-                pessoa.Cpf = PessoaValidate.AddCharactersDocument(pessoaIn.Cpf);               
+                pessoa.Cpf = cpf;                               
                 pessoa.Nome = pessoaIn.Nome;
                
                 pessoa.Telefone = pessoaIn.Telefone;
