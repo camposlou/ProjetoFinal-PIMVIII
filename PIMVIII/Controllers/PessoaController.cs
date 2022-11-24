@@ -34,13 +34,13 @@ namespace PIMVIII.Controllers
 
             var pessoa = _pessoaServices.GetCpf(pessoaIn.Cpf);
 
-            if (pessoa is null)
+            if (pessoa == null)
             {
                 pessoa = new();
                 pessoa.Cpf = PessoaValidate.RemoveCharactersDocument(pessoaIn.Cpf);
-                pessoa.Cpf = PessoaValidate.AddCharactersDocument(pessoaIn.Cpf);
+                pessoa.Cpf = PessoaValidate.AddCharactersDocument(pessoaIn.Cpf);               
                 pessoa.Nome = pessoaIn.Nome;
-
+               
                 pessoa.Telefone = pessoaIn.Telefone;
                 pessoa.Telefone.PessoaCpf = pessoa.Cpf;
 
@@ -56,8 +56,11 @@ namespace PIMVIII.Controllers
 
                 return Created("GetPessoa", pessoa);
             }
-
-            return BadRequest("CPF Já está Cadastrado!");
+            else
+            {
+                return BadRequest("CPF Já está Cadastrado!");
+            }
+         
         }
         #endregion
 
@@ -70,7 +73,7 @@ namespace PIMVIII.Controllers
         [HttpGet("cpf")]
         public ActionResult<Pessoa> Get(string cpf)
         {
-            if (PessoaValidate.ValidateCpf(cpf) == true)
+            if (PessoaValidate.ValidateCpf(cpf))
             {
                 var pessoa = _pessoaServices.GetCpf(PessoaValidate.MaskCPF(cpf));
                 if (pessoa == null)

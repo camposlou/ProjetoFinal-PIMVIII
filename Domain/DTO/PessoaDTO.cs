@@ -37,9 +37,12 @@ namespace Domain.DTO
 
     public class PessoaPostDTO
     {
+        [Required(ErrorMessage = "CPF Precisa de 11 Digitos...")]
+        [MaxLength(14)]       
+        public string Cpf { get; set; }
+
         [StringLength(30)]
         public string Nome { get; set; }
-        public string Cpf { get; set; }
         public EnderecoDTO Endereco { get; set; }
 
         public Telefone Telefone { get; set; }

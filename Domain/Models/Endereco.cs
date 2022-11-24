@@ -33,7 +33,7 @@ namespace Domain.Models
         [Newtonsoft.Json.JsonProperty("uf")]
         public string Estado { get; set; }
 
-        [StringLength(14)]
+        
         [JsonIgnore]
         public string PessoaCpf { get; set; }
     }

@@ -15,7 +15,7 @@ namespace Domain.Models
         [MaxLength(30)]
         public string Tipo { get; set; }
 
-        [StringLength(14)]
+       
         [JsonIgnore]
         public string PessoaCpf { get; set; }
     }
